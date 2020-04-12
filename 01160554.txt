@@ -1,0 +1,22 @@
+首先因為需要在程式中，角度都是以弳度表示，需大量畫出圓形所以使用define
+#define rad(degrees) ((degrees)*(3.1415926535/180.))
+來將角度轉成弳度
+
+過來glColor3f經過測試之後，三個參數應該是將RGB的0~255換成0~1，所以一樣define
+#define RGBtoGlColor3f(R, G, B) glColor3f(((R)/255.), ((G)/255.), ((B)/255.))
+來直接使用RGB定義顏色
+
+然後不喜歡視窗預設在左上角，所以使用Windows API讓視窗在螢幕中央
+GetSystemMetrics()
+
+該圖形比較特別的部分是眼睛部分，是旋轉的橢圓形，上維基百科稍為查詢一下旋轉公式
+順時針：
+x' = xcosθ+ysinθ
+y' = -xsinθ+ycosθ
+逆時針：
+x' = xcosθ-ysinθ
+y' = xsinθ+ycosθ
+
+橢圓形公式，中心點(h, k)，ab為橢圓形寬高
+x = h + acosθ
+y = k + bsinθ
